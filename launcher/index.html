@@ -122,7 +122,7 @@
                 radio.dispatchEvent(new Event("change"));
             }
             })
-            .catch(err => console.error('Ошибка загрузки статуса:', err));
+            .catch(err => console.error('Error status loading: ', err));
         });
 
     renderServers();
