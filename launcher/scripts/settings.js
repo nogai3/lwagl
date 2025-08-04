@@ -3,8 +3,8 @@ const path = require("path");
 const { config } = require("process");
 
 const defaultSettings = {
-    nickname: "Albedo_Kreideprinz",
-    server: "showlow",
+    nickname: "Nick_Name",
+    server: "phoenix",
     memory: 2048,
     wideScreen: false,
     potato: false,
