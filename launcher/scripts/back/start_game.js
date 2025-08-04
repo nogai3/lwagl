@@ -43,7 +43,7 @@ function startGame() {
     const config = loadConfig();
 
     if (!fs.existsSync(gamePathFile)) {
-        console.error("Файл game_path.txt с путём к игре не найден.");
+        console.error("File game_path.txt is doesn`t exist!");
         return;
     }
 
@@ -51,13 +51,13 @@ function startGame() {
     const exePath = path.join(gameFolder, "gta_sa.exe");
 
     if (!fs.existsSync(exePath)) {
-        console.error("Файл gta_sa.exe не найден в указанной папке.");
+        console.error("File gta_sa.exe do not found in your directory!");
         return;
     }
 
     const args = generateLaunchArgs(config);
 
-    console.log("Запуск: ", exePath, ...args);
+    console.log("Starting: ", exePath, ...args);
 
     const proc = spawn(exePath, args, {
         cwd: gameFolder,
