@@ -35,9 +35,9 @@ ipcMain.on("update-server", (event, serverId) => {
   const config = loadConfig();
   config.server = serverId;
   saveConfig(config);
-  console.log(`Сервер обновлён на ${serverId}`);
+  console.log(`Server has been changed to: ${serverId}`);
 });
 
 ipcMain.on("update-nickname", (event, newNickname) => {
-  console.log(`Сперма вертолёта: ${newNickname}`);
+  console.log(`64259785683746458763485: ${newNickname}`);
 });
