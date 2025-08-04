@@ -5,5 +5,18 @@
   },
   "dependencies": {
     "electron": "^37.2.5"
+  },
+  "build": {
+    "appId": "com.lighsync.lwagl",
+    "productName": "LWAGL",
+    "win": {
+      "icon": "launcher/assets/ico/windows.ico"
+    },
+    "mac": {
+      "icon": "launcher/assets/ico/osx.icns"
+    },
+    "linux": {
+      "icon": "launcher/assets/ico/linux.png"
+    }
   }
 }

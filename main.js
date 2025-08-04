@@ -8,6 +8,7 @@ function createWindow() {
     width: 800,
     height: 600,
     autoHideMenuBar: true,
+    icon: path.join(__dirname, "launcher/assets/ico", "linux.png"),
     webPreferences: {
       preload: path.join(__dirname, "launcher/scripts/back/preload.js"),
       nodeIntegration: false,
