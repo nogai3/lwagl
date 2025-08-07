@@ -17,8 +17,9 @@ function createWindow() {
     }
   });
 
-  win.loadFile('launcher/index.html');
-  // win.webContents.openDevTools();
+  // win.loadFile('launcher/index.html');
+  win.loadFile('launcher/test.html');
+  win.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
