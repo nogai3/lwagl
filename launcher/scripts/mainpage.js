@@ -38,27 +38,77 @@ const serverName = document.getElementById('serverName');
 const serverOnline = document.getElementById('serverOnline');
 const serverIcon = document.getElementById('serverIcon');
 
+function renderSobesData(data) {
+    const sobesContainer = document.getElementById("sobes");
+    sobesContainer.innerHTML = "";
+
+    if (!data || !data.data || Object.keys(data.data).length === 0) {
+        sobesContainer.textContent = "Нет данных о собеседованиях";
+        return;
+    }
+
+    const entries = Object.entries(data.data);
+    entries.forEach(([title, info]) => {
+        const card = document.createElement("div");
+        card.className = "sobes-card";
+        card.innerHTML = `
+            <h3>${title}</h3>
+            <p><strong>Место:</strong> ${info.place}</p>
+            <p><strong>Время:</strong> ${info.time}</p>
+        `;
+        sobesContainer.appendChild(card);
+    });
+}
+
+
 function renderServers(filter = '') {
     const filtered = servers.filter(s => s.name.toLowerCase().includes(filter.toLowerCase()));
 
-    serverList.innerHTML = serverList.firstElementChild.outerHTML;
+    const searchBlock = document.querySelector('.server-search');
+    const searchInput = document.getElementById('serverSearch');
+    const value = searchInput.value;
+    const selectionStart = searchInput.selectionStart;
+    const selectionEnd = searchInput.selectionEnd;
+
+    serverList.innerHTML = '';
+    if (searchBlock && !serverList.contains(searchBlock)) {
+        serverList.prepend(searchBlock);
+    } else if (searchBlock && serverList.firstChild !== searchBlock) {
+        serverList.insertBefore(searchBlock, serverList.firstChild);
+    }
 
     filtered.forEach(server => {
-    const div = document.createElement('div');
-    div.className = 'server-option';
-    div.innerHTML = `
-        <input type="radio" name="serverchoose" id="${server.id}">
-        <label for="${server.id}"># ${String(server.number).padStart(2, '0')} | ${server.name}</label>
-    `;
-    div.querySelector('input').addEventListener('change', () => {
-        serverName.innerHTML = `${server.name} <p>#${server.number}</p>`;
-        serverOnline.textContent = `${server.online} / 1000`;
-        serverIcon.src = `assets/icons/${server.id}.png`;
-        window.electronAPI?.updateServer(server.id);
+        const div = document.createElement('div');
+        div.className = 'server-option';
+        div.innerHTML = `
+            <input type="radio" name="serverchoose" id="${server.id}">
+            <label for="${server.id}"># ${String(server.number).padStart(2, '0')} | ${server.name}</label>
+        `;
+        div.querySelector('input').addEventListener('change', async () => {
+            serverName.innerHTML = `${server.name} <p>#${server.number}</p>`;
+            serverOnline.textContent = `${server.online} / 1000`;
+            serverIcon.src = `assets/icons/${server.id}.png`;
+            window.electronAPI?.updateServer(server.id);
+
+            try {
+                const sobesData = await window.electronAPI.getSobesData("gweIQTE5yk8IzFKtX8WLNkgihwZulE4X", server.id);
+                renderSobesData(sobesData);
+            } catch (error) {
+                console.error("Ошибка при загрузке собеседований!");
+            }
+        });
+        serverList.appendChild(div);
     });
-    serverList.appendChild(div);
-    });
+
+    const newSearchInput = document.getElementById('serverSearch');
+    newSearchInput.value = value;
+    newSearchInput.setSelectionRange(selectionStart, selectionEnd);
+    newSearchInput.focus();
 }
+
+searchInput.addEventListener("input", (e) => {
+    renderServers(e.target.value);
+});
 
 window.electronAPI.getConfig().then(config => {
     const selectedServer = config?.server;
