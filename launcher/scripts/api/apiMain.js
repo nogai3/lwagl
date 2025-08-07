@@ -3,6 +3,7 @@ async function getDataFromServer(url, options) {
         const response = await fetch(url, options);
         const data = await response.json();
         console.log(data);
+        return data;
     } catch (error) {
         console.error(eror);
     }
@@ -15,7 +16,7 @@ async function getSobesData(apiKey, serverId) {
         headers: {'X-API-Key': apiKey},
         body: undefined
     };
-    getDataFromServer(url, options);
+    return await getDataFromServer(url, options);
 }
 
 async function getServerOnline(apiKey, serverId) {
@@ -25,7 +26,7 @@ async function getServerOnline(apiKey, serverId) {
         headers: {'X-API-Key': apiKey},
         body: undefined
     };
-    getDataFromServer(url, options);
+    return await getDataFromServer(url, options);
 }
 
 async function getServerAdmins(apiKey, serverId) {
@@ -35,7 +36,7 @@ async function getServerAdmins(apiKey, serverId) {
         headers: {'X-API-Key': apiKey},
         body: undefined
     };
-    getDataFromServer(url, options);
+    return await getDataFromServer(url, options);
 }
 
 async function getServerFamilies(apiKey, serverId) {
@@ -45,7 +46,7 @@ async function getServerFamilies(apiKey, serverId) {
         headers: {'X-API-Key': apiKey},
         body: undefined
     };
-    getDataFromServer(url, options);
+    return await getDataFromServer(url, options);
 }
 
 async function getPlayerDataFromFind(apiKey, nickname, serverId) {
@@ -55,11 +56,5 @@ async function getPlayerDataFromFind(apiKey, nickname, serverId) {
         headers: {'X-API-Key': apiKey},
         body: undefined
     };
-    getDataFromServer(url, options);
+    return await getDataFromServer(url, options);
 }
-
-getSobesData("а хуй тебе", 17);
-getServerOnline("а хуй тебе", 17);
-getServerAdmins("а хуй тебе", 17);
-getServerFamilies("а хуй тебе", 17);
-getPlayerDataFromFind("а хуй тебе", "Albedo_Kreideprinz", 17);
