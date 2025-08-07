@@ -5,8 +5,8 @@ const path  = require("path");
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     autoHideMenuBar: true,
     icon: path.join(__dirname, "launcher/assets/ico", "linux.png"),
     webPreferences: {
@@ -17,9 +17,9 @@ function createWindow() {
     }
   });
 
-  // win.loadFile('launcher/index.html');
-  win.loadFile('launcher/test.html');
-  win.webContents.openDevTools();
+  win.loadFile('launcher/index.html');
+  // win.loadFile('launcher/test.html');
+  // win.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);

@@ -23,7 +23,7 @@ body {
 }
 
 .left-section {
-    width: 250px;
+    width: 275px;
     background-color: #1e1e1e;
     padding: 16px;
     overflow-y: auto;
@@ -78,7 +78,18 @@ body {
     background-color: #181818;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.top-content {
+    flex-grow: 1;
+    /*padding: 32px;*/
+    background-color: #181818;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
 }
 
 .server-info {
@@ -102,6 +113,49 @@ body {
     margin: 4px 0 0;
     color: #aaa;
     font-size: 14px;
+}
+
+.tabs {
+    margin-top: 0;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2b2b2b;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.tab-button:hover,
+.tab-button.active {
+    background-color: #505050;
+}
+
+.tab-content {
+    margin-top: 0;
+    background-color: #2b2b2b;
+    padding: 16px;
+    border-radius: 8px;
+    min-height: 100px;
+    font-size: 14px;
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.bottom-button {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
 }
 
 .actions {
