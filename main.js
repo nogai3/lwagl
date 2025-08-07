@@ -19,7 +19,7 @@ function createWindow() {
 
   win.loadFile('launcher/index.html');
   // win.loadFile('launcher/test.html');
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
